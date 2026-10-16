@@ -49,10 +49,20 @@ const MARKDOWN_V2_SPECIAL_CHARS = /([_*[\]()~`>#+\-=|{}.!])/g;
 
 /**
  * Escapes special characters for Telegram MarkdownV2 parse mode.
- * Safely handles `null`, `undefined`, and non-string values.
+ *
+ * Backslashes are escaped first so a value ending in one cannot consume the
+ * next structural character, and control characters are collapsed to single
+ * spaces so the value always stays on one line. Safely handles `null`,
+ * `undefined`, and non-string values.
  */
 function escapeMarkdownV2(text: string | number | null | undefined): string {
-  return String(text ?? '').replace(MARKDOWN_V2_SPECIAL_CHARS, '\\$1');
+  const singleLine = String(text ?? '')
+    .replace(/\p{Cc}+/gu, ' ')
+    .trim();
+
+  return singleLine
+    .replace(/\\/g, '\\\\')
+    .replace(MARKDOWN_V2_SPECIAL_CHARS, '\\$1');
 }
 
 /**
