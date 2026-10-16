@@ -59,8 +59,9 @@ The Telegram bot token and chat id are Supabase Edge Function secrets,
 not Vite variables - set them with
 `supabase secrets set TELEGRAM_BOT_TOKEN=... TELEGRAM_CHAT_ID=...`.
 
-Requires Node `>=22.12.0` (per `package.json`), a Supabase
-project, and a Telegram bot with its chat id.
+Requires Node `^22.22.2`, `^24.15.0`, or `>=26.0.0` (per `package.json`;
+`.nvmrc` pins Node 24 for the repository), a Supabase project, and a
+Telegram bot with its chat id.
 
 </details>
 
