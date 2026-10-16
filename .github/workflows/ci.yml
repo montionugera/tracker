@@ -48,6 +48,9 @@ jobs:
       - name: Type Checking
         run: npm run type-check
 
+      - name: Unit Tests
+        run: npm test
+
       - name: Build Production
         run: npm run build
         env:
