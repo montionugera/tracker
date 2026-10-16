@@ -7,6 +7,7 @@ import AppIcon from '@/components/ui/AppIcon.vue';
 import AppModal from '@/components/ui/AppModal.vue';
 import { supabase } from '@/supabase/client';
 import { formatMoney, formatQuantity } from '@/utils/number';
+import { escapeMarkdownV2 } from '@/utils/telegram';
 
 // ─────────────────────────────────────────────
 // Props & Emits
@@ -44,16 +45,6 @@ const grandTotal = computed<number>(() =>
 // ─────────────────────────────────────────────
 // Telegram MarkdownV2 helpers
 // ─────────────────────────────────────────────
-
-const MARKDOWN_V2_SPECIAL_CHARS = /([_*[\]()~`>#+\-=|{}.!])/g;
-
-/**
- * Escapes special characters for Telegram MarkdownV2 parse mode.
- * Safely handles `null`, `undefined`, and non-string values.
- */
-function escapeMarkdownV2(text: string | number | null | undefined): string {
-  return String(text ?? '').replace(MARKDOWN_V2_SPECIAL_CHARS, '\\$1');
-}
 
 /**
  * Drops a leading "บริษัท" so the salutation never repeats it: supplier
